@@ -1,0 +1,34 @@
+name: Feature request
+description: Usulkan peningkatan yang relevan dengan Morgen Geschäft.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Masalah yang diselesaikan
+      description: Jelaskan kebutuhan pengguna atau contributor.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Solusi yang diusulkan
+      description: Jelaskan alur, komponen terdampak, dan hasil yang diharapkan.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatif
+      description: Tuliskan pendekatan lain yang sudah dipertimbangkan.
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Konfirmasi
+      options:
+        - label: Usulan ini relevan dengan ruang lingkup project.
+          required: true
+        - label: Saya sudah mencari issue atau pull request serupa.
+          required: true

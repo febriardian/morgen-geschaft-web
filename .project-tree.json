@@ -1,4 +1,16 @@
 {
+  ".github/ISSUE_TEMPLATE/bug_report.yml": {
+    "size": 1525,
+    "sha256": "3bcbfd3d72757a57f8dbbb3f036d1999e426cb33a9fa9bb915138f51f2ac93bf"
+  },
+  ".github/ISSUE_TEMPLATE/config.yml": {
+    "size": 235,
+    "sha256": "45337e02be67c2f4c4c4a34eef6a52bcd4f27699ada37f68f0e2ad4b95813199"
+  },
+  ".github/ISSUE_TEMPLATE/feature_request.yml": {
+    "size": 969,
+    "sha256": "cef36080692e472e1ec20bd94e1efe1f30d6c65ece4276dd241460c676b5f259"
+  },
   ".github/workflows/ci.yml": {
     "size": 2323,
     "sha256": "fa18c248418efa14d64ea96d87bcb748d9e4130a2ec0b60f619db5dc13afb59a"
@@ -6,6 +18,10 @@
   ".github/dependabot.yml": {
     "size": 297,
     "sha256": "1b6365671f509d9c77f8a9909a2b6761aac5440192fd3598a5ac3a370e2adb83"
+  },
+  ".github/PULL_REQUEST_TEMPLATE.md": {
+    "size": 626,
+    "sha256": "4f52e467afe347ca46ea777d6f41f8cf01ddd8fa07a8bee0ca1085551b868c58"
   },
   "assets/logo.webp": {
     "size": 26492,
@@ -324,8 +340,8 @@
     "sha256": "a84d13caca53e0b54b14c5db2d97be3eb4a7fa6b8dc69b0b16d188e94e0fa836"
   },
   "docs/README.md": {
-    "size": 63796,
-    "sha256": "e29401d08d81cfe43412208327d1e31a4ec4f3630b2392edd362e1d3f64015f6"
+    "size": 58574,
+    "sha256": "22691a6251f49dd3a31bca39d03bddf8da8e1245f3cf97f03fe02c8b4b853276"
   },
   "firebase/firestore.indexes.json": {
     "size": 2237,
@@ -1209,7 +1225,7 @@
   },
   "frontend/package.json": {
     "size": 1146,
-    "sha256": "ef7b89fa90a42e256361df9a9474b0f903610fa1d57146aaba34a40e3a0f2da2"
+    "sha256": "30f72136c63397f43064609753370d6524ccefbca8727b11ba8868cb6f21e48e"
   },
   "frontend/playwright.config.js": {
     "size": 694,
@@ -1335,6 +1351,10 @@
     "size": 747,
     "sha256": "5628da694161ebb1c4b611814481467625dd3f250f125745485f0b38203a2157"
   },
+  ".nvmrc": {
+    "size": 3,
+    "sha256": "f14b4987904bcb5814e4459a057ed4d20f58a633152288a761214dcd28780b56"
+  },
   ".prettierignore": {
     "size": 98,
     "sha256": "18e3cb77caaf5fc1b9e1ad7aad7bcec95d175b9e1359786c311048c084454d5c"
@@ -1342,6 +1362,14 @@
   ".prettierrc.json": {
     "size": 128,
     "sha256": "a9572a5d32ec1f01da634a3f8cc4bd6ffb304febda5c42274a62546689c870d5"
+  },
+  "CHANGELOG.md": {
+    "size": 831,
+    "sha256": "b7277550616dc99fccb95d0e1311ba7dc4e339a3b93abff0e012c8ef7db07bd4"
+  },
+  "CODE_OF_CONDUCT.md": {
+    "size": 1154,
+    "sha256": "e32df68ad1a2238d39410957cf615662cd09698e4bf04d74ab0abc892a668226"
   },
   "eslint.config.mjs": {
     "size": 1372,
@@ -1356,15 +1384,19 @@
     "sha256": "20fa6d59660bd8c2b0472be4a991863cb4bf0d025fee29b2ac32510b71c2d6ae"
   },
   "package-lock.json": {
-    "size": 417814,
-    "sha256": "1749265fc082e62487bc723be7f91684a98e8fe6b299eaf18da0ff3506282a82"
+    "size": 417865,
+    "sha256": "b69ee1ef1fb969196c69bf27151c35734ec819f15ea7abcd7869586d74974b97"
   },
   "package.json": {
-    "size": 2879,
-    "sha256": "0903ccb9be0efc90dacfc31b3221f267b45415c5ba0e02a17d30107adf6a29d8"
+    "size": 2918,
+    "sha256": "64f8063cbe97d426b5b229c1dc436bd1554d8307f0322304064a1197bf805780"
   },
   "README.md": {
-    "size": 10872,
-    "sha256": "8e1981f1df9be140c7bd60876e2baa623ae8008e2e9f4be9fef678afe4705085"
+    "size": 10098,
+    "sha256": "0efa66da6e722808af1719b0b50cf0bfa25888259820c44c8abed57c11547298"
+  },
+  "SECURITY.md": {
+    "size": 1394,
+    "sha256": "64e75d70fdf91d979d4ecf4b5c100ba0fa82b77eea13f16c5d5470ade0b67fb0"
   }
 }

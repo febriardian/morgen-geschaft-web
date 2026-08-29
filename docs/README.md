@@ -5,14 +5,15 @@ mencakup gambaran produk, fitur pelanggan dan admin, arsitektur, instalasi,
 konfigurasi, API, model data, keamanan, pengujian, deployment, operasi, serta
 panduan kontribusi.
 
-Dokumentasi ini disusun berdasarkan audit source pada 27 Agustus 2026. Jika
-perilaku aplikasi dan dokumen berbeda, source code dan konfigurasi environment
-yang sedang dijalankan adalah sumber kebenaran teknis.
+Dokumentasi ini ditujukan bagi pengguna, developer, contributor, dan operator
+yang ingin memahami atau menjalankan project. Source code dan konfigurasi
+environment yang sedang dijalankan menjadi sumber kebenaran teknis ketika ada
+perbedaan perilaku antarversi.
 
 ## Daftar isi
 
 1. [Tentang project](#1-tentang-project)
-2. [Status audit](#2-status-audit)
+2. [Cakupan project](#2-cakupan-project)
 3. [Fitur](#3-fitur)
 4. [Arsitektur](#4-arsitektur)
 5. [Struktur repository](#5-struktur-repository)
@@ -32,8 +33,6 @@ yang sedang dijalankan adalah sumber kebenaran teknis.
 19. [Operasional, monitoring, dan backup](#19-operasional-monitoring-dan-backup)
 20. [Troubleshooting](#20-troubleshooting)
 21. [Kontribusi](#21-kontribusi)
-22. [Batasan dan pekerjaan lanjutan](#22-batasan-dan-pekerjaan-lanjutan)
-23. [Checklist sebelum open source](#23-checklist-sebelum-open-source)
 
 ---
 
@@ -95,55 +94,17 @@ Rute publik memakai slug yang dilokalkan. Contoh:
 
 ---
 
-## 2. Status audit
+## 2. Cakupan project
 
-Audit dilakukan terhadap source frontend, backend, Firebase rules/indexes,
-skrip operasional, konfigurasi CI, dokumentasi lama, dan struktur artifact.
+Repository ini memuat aplikasi web pelanggan, panel administrasi, API backend,
+konfigurasi Firebase, quality gate, serta script build dan operasional. Aplikasi
+Android didistribusikan melalui website, sedangkan source Expo/React Native
+dikelola sebagai project terpisah.
 
-### Hasil verifikasi
-
-| Pemeriksaan                 | Hasil                                                              |
-| --------------------------- | ------------------------------------------------------------------ |
-| Backend test                | 176 lulus                                                          |
-| Frontend test               | 69 lulus                                                           |
-| Total automated test        | 245 lulus                                                          |
-| ESLint                      | Lulus dengan 18 warning dan 0 error                                |
-| Build frontend production   | Berhasil                                                           |
-| Firebase environment guard  | Berfungsi; build memerlukan konfigurasi publik Firebase            |
-| Secret scan dasar           | Tidak menemukan secret nyata pada source yang diaudit              |
-| Dependency audit production | Tidak ada critical; terdapat 6 moderate pada rantai firebase-admin |
-| Feature flags               | Enam fitur tersedia dan aktif secara default                       |
-
-Build menghasilkan peringatan ukuran chunk untuk bundle Firebase dan bundle
-utama. Peringatan ini tidak menggagalkan build, tetapi menjadi kandidat optimasi
-performa.
-
-Lint sempat gagal saat dijalankan bersamaan dengan build karena Vite membuat dan
-menghapus file konfigurasi sementara. Ketika dijalankan berurutan, lint selesai
-dengan 18 warning dan 0 error. Warning utamanya adalah dependency React Hook dan
-variable/import yang tidak dipakai.
-
-Audit dependency tidak menemukan kerentanan critical, tetapi melaporkan enam
-moderate pada dependency transitif firebase-admin. Perintah npm audit fix
---force menawarkan downgrade yang bersifat breaking; jangan menjalankannya tanpa
-uji kompatibilitas dan review dependency.
-
-### Temuan repository untuk open source
-
-- Dokumentasi lama terpecah menjadi sembilan file dan beberapa informasi sudah
-  tidak sesuai source terbaru.
-- Roadmap lama menyatakan kuis tipe kulit dan flash sale belum tersedia, padahal
-  keduanya sudah diimplementasikan.
-- Dokumentasi deployment lama memuat path akun hosting dan nameserver production
-  tertentu. Detail seperti ini tidak tepat untuk dokumentasi publik.
-- Repository menggunakan MIT License melalui file LICENSE pada root project.
-- Repository mempunyai README.md pada root sebagai halaman depan GitHub dan
-  docs/README.md sebagai dokumentasi lengkap.
-- ZIP hasil deployment, build lama, source map, log debug, dan artifact sementara
-  masih ada di salinan project yang diaudit. File tersebut tidak boleh ikut
-  commit publik.
-- Source website menyediakan tautan APK, tetapi source aplikasi Android tidak
-  berada dalam ZIP website ini.
+Fitur yang bergantung pada provider eksternal akan aktif setelah environment
+layanan terkait tersedia. Data toko seperti produk, artikel, promo, pengiriman,
+dan basis pengetahuan GESA dikelola melalui panel admin atau Firestore sesuai
+jenis datanya.
 
 ### Arti status fitur
 
@@ -151,8 +112,6 @@ uji kompatibilitas dan review dependency.
 | ----------------- | ---------------------------------------------------------------------- |
 | Tersedia          | Alur dan kode fitur ada dalam source                                   |
 | Perlu konfigurasi | Kode ada, tetapi membutuhkan layanan, secret, data, atau DNS eksternal |
-| Parsial           | Sebagian alur ada atau masih membutuhkan proses manual                 |
-| Belum tersedia    | Tidak ditemukan sebagai alur aktif pada source ini                     |
 
 ---
 
@@ -193,7 +152,6 @@ uji kompatibilitas dan review dependency.
 | GESA chatbot                  | Perlu konfigurasi | Memerlukan Gemini API key                                                   |
 | Privacy notice                | Tersedia          | Persetujuan analitik                                                        |
 | Unduh APK                     | Tersedia          | Mengarah ke /download/morgen-geschaft-v1.0.0.apk                            |
-| COD                           | Belum tersedia    | Checkout production masih menggunakan Midtrans                              |
 
 ### 3.2 Fitur admin
 
@@ -431,7 +389,7 @@ key atau secret pada variable VITE_*.
 
 | Variable                          | Kebutuhan   | Fungsi                                      |
 | --------------------------------- | ----------- | ------------------------------------------- |
-| VITE_API_BASE                     | Disarankan  | Base URL API; kosong untuk domain yang sama |
+| VITE_API_BASE                     | Opsional    | Base URL API; kosong untuk domain yang sama |
 | VITE_MIDTRANS_CLIENT_KEY          | Kondisional | Client key publik Midtrans                  |
 | VITE_MIDTRANS_IS_PRODUCTION       | Kondisional | Memilih Snap production/sandbox             |
 | VITE_FIREBASE_API_KEY             | Wajib       | Firebase client config                      |
@@ -456,7 +414,7 @@ key atau secret pada variable VITE_*.
 | NODE_ENV                        | Wajib production     | development atau production         |
 | PORT                            | Wajib                | Port Express                        |
 | FRONTEND_URL                    | Wajib                | Origin CORS dan link email          |
-| PUBLIC_SITE_URL                 | Disarankan           | Canonical, sitemap, dan link publik |
+| PUBLIC_SITE_URL                 | Production           | Canonical, sitemap, dan link publik |
 | SERVE_FRONTEND                  | Wajib satu domain    | Melayani folder public              |
 | TRUST_PROXY                     | Wajib di balik proxy | Jumlah/lokasi proxy terpercaya      |
 | ENFORCE_HTTPS                   | Wajib production     | Redirect HTTP ke HTTPS              |
@@ -477,48 +435,48 @@ key atau secret pada variable VITE_*.
 
 ### 8.4 AI, email, cache, dan media
 
-| Variable                      | Kebutuhan             | Fungsi                               |
-| ----------------------------- | --------------------- | ------------------------------------ |
-| GEMINI_API_KEY                | Wajib GESA            | Gemini                               |
-| SMTP_HOST                     | Wajib email           | Host SMTP                            |
-| SMTP_PORT                     | Wajib email           | Port SMTP                            |
-| SMTP_USER                     | Wajib email           | Username                             |
-| SMTP_PASS                     | Wajib email           | Password/API key SMTP                |
-| SMTP_FROM                     | Wajib email           | Identitas pengirim                   |
-| ADMIN_NOTIFICATION_EMAIL      | Opsional              | Tujuan email admin                   |
-| RATE_LIMIT_STORE              | Disarankan production | redis atau memory                    |
-| RATE_LIMIT_CLUSTER_INSTANCES  | Kondisional           | Pembagi fallback memory pada cluster |
-| UPSTASH_REDIS_REST_URL        | Wajib mode redis      | Endpoint Upstash                     |
-| UPSTASH_REDIS_REST_TOKEN      | Wajib mode redis      | Token Upstash                        |
-| UPSTASH_REDIS_REST_TIMEOUT_MS | Opsional              | Timeout koneksi                      |
-| REDIS_RETRY_COOLDOWN_MS       | Opsional              | Jeda retry                           |
-| RATE_LIMIT_REDIS_PREFIX       | Opsional              | Prefix key                           |
-| CLOUDINARY_CLOUD_NAME         | Opsional              | Cloudinary                           |
-| CLOUDINARY_API_KEY            | Opsional              | Cloudinary                           |
-| CLOUDINARY_API_SECRET         | Opsional              | Cloudinary secret                    |
-| UPLOAD_DIR                    | Opsional              | Fallback upload lokal                |
+| Variable                      | Kebutuhan        | Fungsi                               |
+| ----------------------------- | ---------------- | ------------------------------------ |
+| GEMINI_API_KEY                | Wajib GESA       | Gemini                               |
+| SMTP_HOST                     | Wajib email      | Host SMTP                            |
+| SMTP_PORT                     | Wajib email      | Port SMTP                            |
+| SMTP_USER                     | Wajib email      | Username                             |
+| SMTP_PASS                     | Wajib email      | Password/API key SMTP                |
+| SMTP_FROM                     | Wajib email      | Identitas pengirim                   |
+| ADMIN_NOTIFICATION_EMAIL      | Opsional         | Tujuan email admin                   |
+| RATE_LIMIT_STORE              | Production       | redis atau memory                    |
+| RATE_LIMIT_CLUSTER_INSTANCES  | Kondisional      | Pembagi fallback memory pada cluster |
+| UPSTASH_REDIS_REST_URL        | Wajib mode redis | Endpoint Upstash                     |
+| UPSTASH_REDIS_REST_TOKEN      | Wajib mode redis | Token Upstash                        |
+| UPSTASH_REDIS_REST_TIMEOUT_MS | Opsional         | Timeout koneksi                      |
+| REDIS_RETRY_COOLDOWN_MS       | Opsional         | Jeda retry                           |
+| RATE_LIMIT_REDIS_PREFIX       | Opsional         | Prefix key                           |
+| CLOUDINARY_CLOUD_NAME         | Opsional         | Cloudinary                           |
+| CLOUDINARY_API_KEY            | Opsional         | Cloudinary                           |
+| CLOUDINARY_API_SECRET         | Opsional         | Cloudinary secret                    |
+| UPLOAD_DIR                    | Opsional         | Fallback upload lokal                |
 
 Ketiga variable Cloudinary harus dianggap satu paket. Jika tidak lengkap,
 backend memakai fallback lokal.
 
 ### 8.5 Notifikasi dan observability
 
-| Variable                        | Kebutuhan             | Fungsi                                |
-| ------------------------------- | --------------------- | ------------------------------------- |
-| VAPID_PUBLIC_KEY                | Opsional              | Web Push                              |
-| VAPID_PRIVATE_KEY               | Opsional              | Web Push secret                       |
-| SENTRY_DSN                      | Opsional              | Sentry backend                        |
-| SENTRY_ENVIRONMENT              | Opsional              | Nama environment                      |
-| SENTRY_RELEASE                  | Opsional              | Versi release                         |
-| SENTRY_TRACES_SAMPLE_RATE       | Opsional              | Sampling tracing                      |
-| STORE_WHATSAPP                  | Opsional              | Kontak customer service               |
-| FONNTE_TOKEN                    | Opsional              | Notifikasi WhatsApp admin             |
-| ADMIN_WHATSAPP                  | Opsional              | Nomor admin                           |
-| INVOICE_LOGO_PATH               | Opsional              | Logo invoice lokal                    |
-| INVOICE_LOGO_URL                | Opsional              | Logo invoice URL                      |
-| FIRESTORE_BACKUP_RETENTION_DAYS | Opsional              | Retensi backup JSON                   |
-| ABANDONED_CART_REMINDER_MINUTES | Opsional              | Jeda pengingat keranjang              |
-| REQUIRE_ADMIN_MFA               | Disarankan production | Menolak sesi admin tanpa faktor kedua |
+| Variable                        | Kebutuhan  | Fungsi                                |
+| ------------------------------- | ---------- | ------------------------------------- |
+| VAPID_PUBLIC_KEY                | Opsional   | Web Push                              |
+| VAPID_PRIVATE_KEY               | Opsional   | Web Push secret                       |
+| SENTRY_DSN                      | Opsional   | Sentry backend                        |
+| SENTRY_ENVIRONMENT              | Opsional   | Nama environment                      |
+| SENTRY_RELEASE                  | Opsional   | Versi release                         |
+| SENTRY_TRACES_SAMPLE_RATE       | Opsional   | Sampling tracing                      |
+| STORE_WHATSAPP                  | Opsional   | Kontak customer service               |
+| FONNTE_TOKEN                    | Opsional   | Notifikasi WhatsApp admin             |
+| ADMIN_WHATSAPP                  | Opsional   | Nomor admin                           |
+| INVOICE_LOGO_PATH               | Opsional   | Logo invoice lokal                    |
+| INVOICE_LOGO_URL                | Opsional   | Logo invoice URL                      |
+| FIRESTORE_BACKUP_RETENTION_DAYS | Opsional   | Retensi backup JSON                   |
+| ABANDONED_CART_REMINDER_MINUTES | Opsional   | Jeda pengingat keranjang              |
+| REQUIRE_ADMIN_MFA               | Production | Menolak sesi admin tanpa faktor kedua |
 
 ### 8.6 Aturan secret
 
@@ -821,7 +779,7 @@ mengeskalasi refund/komplain sensitif ke customer service.
 SMTP dipakai untuk OTP, invoice, notifikasi order, permintaan stok, dan pengingat
 keranjang.
 
-Rekomendasi:
+Konfigurasi email production:
 
 - gunakan provider email transaksional;
 - gunakan alamat pengirim pada domain sendiri;
@@ -1051,7 +1009,7 @@ Audit file sensitif:
 
     npm run privacy:audit
 
-### 16.2 Cakupan test saat audit
+### 16.2 Cakupan pengujian
 
 Backend mencakup antara lain:
 
@@ -1264,7 +1222,7 @@ Perubahan data seperti produk, harga, stok, promo, dan pesanan dapat terlihat
 oleh aplikasi jika APK memakai API yang sama. Perubahan UI/kode native selalu
 memerlukan build APK baru.
 
-Source APK tidak termasuk dalam repository website yang diaudit. Jika APK juga
+Source APK tidak termasuk dalam repository website ini. Jika APK juga
 akan di-open-source, gunakan repository atau workspace terpisah dan dokumentasi
 versi yang selaras.
 
@@ -1350,6 +1308,9 @@ Setelah perubahan SMTP/DNS:
 
 ## 21. Kontribusi
 
+Kontribusi mengikuti [Code of Conduct](../CODE_OF_CONDUCT.md), template issue,
+dan template pull request yang tersedia pada repository.
+
 ### 21.1 Workflow
 
 1. Fork repository.
@@ -1386,73 +1347,7 @@ Setelah perubahan SMTP/DNS:
 - [ ] Alur ID dan EN diuji.
 - [ ] Dampak keamanan dan rollback dijelaskan.
 
----
-
-## 22. Batasan dan pekerjaan lanjutan
-
-### Belum tersedia
-
-- COD.
-- OpenAPI schema formal.
-- Source Android dalam repository website.
-
-### Perlu penyempurnaan
-
-- Optimasi bundle besar melalui code splitting lebih lanjut.
-- Hilangkan artifact build/ZIP/log dari repository sebelum publikasi.
-- Generalisasi domain hard-coded pada SEO, robots, email fallback, dan skrip
-  verifikasi agar fork dapat memakai domain lain tanpa pencarian manual.
-- Generalisasi nama brand bila project ditujukan menjadi engine e-commerce yang
-  dapat dipakai ulang.
-- Tambahkan test integrasi provider pada environment sandbox.
-- Tambahkan schema validation terpusat untuk request API.
-- Dokumentasikan versi/migrasi data bila project mulai menerima contributor.
-- Buat admin UI untuk gesa_knowledge bila pengelolaan melalui Firestore Console
-  dianggap terlalu teknis.
-
-### Data yang wajib diisi operator
-
-Fitur dapat ada di kode tetapi tidak tampil bila datanya kosong. Contoh:
-
-- BPOM, batch, kedaluwarsa, dan peringatan produk;
-- artikel English;
-- kupon publik;
-- shipping origin/free-shipping;
-- pengetahuan GESA;
-- key provider eksternal;
-- APK pada public/download.
-
----
-
-## 23. Checklist sebelum open source
-
-### Wajib
-
-- [x] MIT License tersedia pada root repository.
-- [ ] Hapus .env, service account, token, credential, dan backup.
-- [ ] Hapus firestore-debug.log dan seluruh *.log.
-- [ ] Hapus public-update.zip dan ZIP deployment lain.
-- [ ] Hapus backend/public dan frontend/dist dari commit.
-- [ ] Hapus source map dari artifact publik.
-- [ ] Hapus data pelanggan dan contoh order nyata.
-- [ ] Ganti path akun hosting, email pribadi, nomor WhatsApp, dan detail DNS
-      pribadi dengan placeholder.
-- [ ] Jalankan npm run privacy:audit.
-- [ ] Jalankan npm audit --omit=dev --audit-level=critical.
-- [ ] Jalankan seluruh lint, test, dan build secara berurutan.
-- [ ] Periksa riwayat Git; menghapus file dari commit terakhir tidak menghapus
-      secret dari commit lama.
-- [ ] Rotasi semua secret yang pernah masuk Git atau dibagikan.
-
-### Disarankan
-
-- [ ] Tambahkan SECURITY.md.
-- [ ] Tambahkan CODE_OF_CONDUCT.md.
-- [ ] Tambahkan template issue dan pull request.
-- [ ] Aktifkan Dependabot dan branch protection.
-- [ ] Tetapkan dukungan versi Node.
-- [ ] Tambahkan release/tag dan changelog.
-- [ ] Pisahkan dokumentasi deployment pribadi dari repository publik.
+Riwayat perubahan versi tersedia pada [CHANGELOG.md](../CHANGELOG.md).
 
 ---
 

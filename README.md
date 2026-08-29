@@ -5,7 +5,7 @@
 
 **Storefront e-commerce bilingual dengan pembayaran, pengiriman, loyalty, referral, chatbot AI, retur, dan panel administrasi.**
 
-[Website](https://morgengeschaft.com/id) · [English](https://morgengeschaft.com/en) · [Dokumentasi lengkap](./docs/README.md) · [Lisensi MIT](./LICENSE)
+[Website](https://morgengeschaft.com/id) · [English](https://morgengeschaft.com/en) · [Dokumentasi lengkap](./docs/README.md) · [Changelog](./CHANGELOG.md) · [Lisensi MIT](./LICENSE)
 </div>
 
 ---
@@ -235,16 +235,6 @@ npm run build
 npm run privacy:audit
 ```
 
-Hasil audit source pada 27 Agustus 2026:
-
-- 176 backend test lulus.
-- 69 frontend test lulus.
-- Total 245 automated test lulus.
-- Build frontend production berhasil.
-- ESLint selesai dengan 0 error dan 18 warning.
-- Tidak ada dependency vulnerability critical; terdapat enam moderate pada
-  dependency transitif Firebase Admin.
-
 ## Build
 
 Build frontend:
@@ -264,9 +254,9 @@ npm run build:hosting
 Artifact build, node_modules, log, backup, ZIP deployment, dan file environment
 tidak boleh ikut commit.
 
-## File yang masuk repository
+## Isi repository
 
-Push source project berikut ke GitHub:
+Repository publik mencakup:
 
 - README.md, LICENSE, dan folder docs;
 - folder assets untuk aset halaman repository;
@@ -279,7 +269,7 @@ Push source project berikut ke GitHub:
 - folder .github;
 - package.json, package-lock.json, dan file konfigurasi project.
 
-Jangan push:
+File berikut dikecualikan melalui `.gitignore`:
 
 - .env, .env.local, atau environment production;
 - service-account JSON, API key, token, dan password;
@@ -289,8 +279,8 @@ Jangan push:
 - ZIP deployment, APK, atau AAB;
 - data pelanggan dan pesanan production.
 
-Aturan pengecualian sudah tersedia dalam file .gitignore. Tetap periksa hasil
-git status sebelum commit.
+File environment contoh tetap tersedia sebagai `.env.example` tanpa nilai
+secret agar instalasi lokal dapat dikonfigurasi dengan aman.
 
 ## Dokumentasi
 
@@ -307,17 +297,8 @@ merendernya menjadi halaman yang dapat dibaca langsung di browser.
 
 ## Keamanan
 
-Jangan melaporkan kerentanan dengan menyertakan secret, data pelanggan, atau
-detail sensitif pada issue publik. Sebelum repository dipublikasikan:
-
-- hapus seluruh file environment dan service account;
-- hapus data pelanggan, order nyata, backup, dan log;
-- hapus build lama, source map, dan ZIP deployment;
-- periksa seluruh riwayat Git;
-- rotasi secret yang pernah dibagikan;
-- jalankan npm run privacy:audit.
-
-Detail kontrol keamanan tersedia pada
+Kebijakan pelaporan kerentanan tersedia pada [SECURITY.md](./SECURITY.md).
+Detail arsitektur dan kontrol keamanan tersedia pada
 [dokumentasi keamanan](./docs/README.md#15-keamanan).
 
 ## Kontribusi
@@ -333,14 +314,7 @@ Kontribusi dapat dilakukan melalui fork dan pull request:
 
 Panduan lengkap tersedia pada
 [bagian kontribusi](./docs/README.md#21-kontribusi).
-
-## Status dan batasan
-
-- COD belum tersedia.
-- Source APK berada di luar repository website ini.
-- Beberapa fitur membutuhkan data Firestore dan layanan eksternal agar tampil.
-- Bundle Firebase masih menghasilkan peringatan ukuran dan menjadi kandidat
-  optimasi.
+Setiap contributor mengikuti [Code of Conduct](./CODE_OF_CONDUCT.md).
 
 ## Lisensi
 

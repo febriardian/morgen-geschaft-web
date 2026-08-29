@@ -2,9 +2,9 @@
 
 Dokumen ini dibuat otomatis untuk membantu memantau perubahan struktur project.
 
-- Terakhir diperbarui: `2026-08-29T11:51:16.072Z`
-- Jumlah file yang dipantau: **342**
-- Jumlah folder yang ditampilkan: **56**
+- Terakhir diperbarui: `2026-08-29T12:42:04.418Z`
+- Jumlah file yang dipantau: **350**
+- Jumlah folder yang ditampilkan: **57**
 - Folder runtime, dependency, build, backup, log, upload, cache, serta file rahasia `.env` tidak ditampilkan.
 - Folder `frontend/photos` diringkas pada tree, tetapi seluruh file gambarnya tetap dipantau oleh snapshot.
 
@@ -13,9 +13,14 @@ Dokumen ini dibuat otomatis untuk membantu memantau perubahan struktur project.
 ```text
 Morgen Geschaft Project/
 ├── .github/
+│   ├── ISSUE_TEMPLATE/
+│   │   ├── bug_report.yml
+│   │   ├── config.yml
+│   │   └── feature_request.yml
 │   ├── workflows/
 │   │   └── ci.yml
-│   └── dependabot.yml
+│   ├── dependabot.yml
+│   └── PULL_REQUEST_TEMPLATE.md
 ├── assets/
 │   └── logo.webp
 ├── backend/
@@ -377,16 +382,20 @@ Morgen Geschaft Project/
 ├── .firebaserc
 ├── .gitattributes
 ├── .gitignore
+├── .nvmrc
 ├── .prettierignore
 ├── .prettierrc.json
 ├── .project-tree.json
+├── CHANGELOG.md
+├── CODE_OF_CONDUCT.md
 ├── eslint.config.mjs
 ├── firebase.json
 ├── LICENSE
 ├── package-lock.json
 ├── package.json
 ├── PROJECT_TREE.md
-└── README.md
+├── README.md
+└── SECURITY.md
 ```
 
 ## Memperbarui tree

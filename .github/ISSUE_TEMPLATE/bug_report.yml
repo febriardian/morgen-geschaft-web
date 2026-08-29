@@ -1,0 +1,62 @@
+name: Bug report
+description: Laporkan perilaku yang tidak berjalan sesuai dokumentasi.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Jangan sertakan secret, credential, atau data pelanggan.
+  - type: input
+    id: version
+    attributes:
+      label: Versi atau commit
+      placeholder: v1.0.0 atau commit SHA
+    validations:
+      required: true
+  - type: dropdown
+    id: component
+    attributes:
+      label: Komponen
+      options:
+        - Frontend pelanggan
+        - Panel admin
+        - Backend API
+        - Firebase
+        - Build atau deployment
+        - Dokumentasi
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Deskripsi masalah
+      description: Jelaskan hasil aktual dan hasil yang diharapkan.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Langkah reproduksi
+      placeholder: |
+        1. Buka ...
+        2. Pilih ...
+        3. Terlihat ...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: OS, browser, Node.js, dan konfigurasi yang relevan tanpa secret.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Konfirmasi
+      options:
+        - label: Saya sudah mencari issue serupa.
+          required: true
+        - label: Laporan ini tidak memuat secret atau data pelanggan.
+          required: true
