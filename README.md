@@ -256,7 +256,7 @@ tidak boleh ikut commit.
 
 ## Isi repository
 
-Repository publik mencakup:
+Repository mencakup:
 
 - README.md, LICENSE, dan folder docs;
 - folder assets untuk aset halaman repository;
@@ -268,19 +268,6 @@ Repository publik mencakup:
 - folder infra yang berisi script backup dan monitoring;
 - folder .github;
 - package.json, package-lock.json, dan file konfigurasi project.
-
-File berikut dikecualikan melalui `.gitignore`:
-
-- .env, .env.local, atau environment production;
-- service-account JSON, API key, token, dan password;
-- node_modules;
-- frontend/dist dan backend/public;
-- log, backup, upload pelanggan, dan data runtime;
-- ZIP deployment, APK, atau AAB;
-- data pelanggan dan pesanan production.
-
-File environment contoh tetap tersedia sebagai `.env.example` tanpa nilai
-secret agar instalasi lokal dapat dikonfigurasi dengan aman.
 
 ## Dokumentasi
 
