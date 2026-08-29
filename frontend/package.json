@@ -16,7 +16,7 @@
     "test:watch": "vitest"
   },
   "dependencies": {
-    "@sentry/react": "^10.69.0",
+    "@sentry/react": "^10.71.0",
     "firebase": "^12.15.0",
     "lucide-react": "^0.383.0",
     "qrcode": "^1.5.4",
