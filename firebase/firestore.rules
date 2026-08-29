@@ -1,0 +1,138 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function adminMfaRequired() {
+      return exists(/databases/$(database)/documents/adminConfig/security)
+        && get(/databases/$(database)/documents/adminConfig/security).data.requireMfa == true;
+    }
+
+    function hasSecondFactor() {
+      return request.auth.token.email_verified == true
+        && request.auth.token.firebase.sign_in_second_factor != null;
+    }
+
+    function isAdmin() {
+      return isAuthenticated()
+        && request.auth.token.admin == true
+        && (!adminMfaRequired() || hasSecondFactor());
+    }
+
+    // Public catalog content. Admin writes require the signed custom claim.
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Coupon codes are not enumerable by visitors. Public validation is handled
+    // by /api/coupons/validate and public promos by /api/promotions.
+    match /coupons/{couponId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /blogPosts/{postId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /blogs/{postId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /reviews/{reviewId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /testimoni/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Customer order lookup and mutations go through the backend. Admin can
+    // still use realtime Firestore listeners after receiving the admin claim.
+    match /orders/{orderId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Customer return/complaint requests are created and viewed through the
+    // backend after order ID + WhatsApp ownership checks. Direct access stays
+    // admin-only so evidence and customer details are never publicly enumerable.
+    match /returnRequests/{requestId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /customerRiskProfiles/{profileId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /couponClaims/{claimId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Seluruh identitas pelanggan, OTP, bukti kepemilikan, dan ledger reward
+    // hanya boleh diakses melalui backend Admin SDK yang memverifikasi token.
+    match /customerProfiles/{customerId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /customerOtpChallenges/{challengeId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /referralCodes/{code} {
+      allow read, write: if isAdmin();
+    }
+
+    match /checkoutRequests/{requestId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Public notification reads use the filtered backend endpoint.
+    match /notifications/{notifId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /push_subscriptions/{subId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /stock_notifications/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /abuse_logs/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /settings/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /_meta/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /admins/{uid} {
+      allow read: if isAuthenticated() && (request.auth.uid == uid || isAdmin());
+      allow write: if isAdmin();
+    }
+
+    match /adminConfig/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Basis pengetahuan GESA (Q&A tambahan). Backend membaca via Admin SDK;
+    // pengeditan hanya oleh admin.
+    match /gesa_knowledge/{docId} {
+      allow read, write: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

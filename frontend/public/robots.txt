@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Allow: /produk/
+Allow: /blog/
+Disallow: /admin
+Disallow: /api/
+Disallow: /cdn-cgi/
+
+Sitemap: https://morgengeschaft.com/sitemap.xml

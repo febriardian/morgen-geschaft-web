@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  schedule:
+    - cron: "20 2 * * 1"
+
+# Batalkan run lama pada branch yang sama saat ada push baru.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      # ESLint diset level "warn" — tidak menggagalkan CI, hanya melaporkan.
+      - name: Run ESLint
+        run: npm run lint
+      - name: Block critical production advisories
+        run: npm audit --omit=dev --audit-level=critical
+
+  backend-tests:
+    name: Backend tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      # Install seluruh workspace (root, frontend, backend) dari lockfile.
+      - name: Install dependencies
+        run: npm ci
+
+      # Test hanya menguji fungsi murni (pricing, security, shipping) sehingga
+      # tidak butuh secret Firebase/Midtrans. Init Firebase Admin bersifat lazy.
+      - name: Run backend tests
+        run: npm test --workspace backend
+
+  frontend:
+    name: Frontend test + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      # Unit test util/i18n (Vitest + jsdom).
+      - name: Run frontend tests
+        run: npm test --workspace frontend
+
+      # Verifikasi build production tetap kompilasi (Vite + konversi WebP).
+      # Nilai dummy hanya untuk melewati firebaseEnvGuard — artifact CI tidak
+      # dideploy; env asli di-inject saat build produksi sebenarnya.
+      - name: Build frontend
+        run: npm run build --workspace frontend
+        env:
+          VITE_FIREBASE_API_KEY: ci-dummy
+          VITE_FIREBASE_AUTH_DOMAIN: ci-dummy.firebaseapp.com
+          VITE_FIREBASE_PROJECT_ID: ci-dummy
+          VITE_FIREBASE_APP_ID: ci-dummy

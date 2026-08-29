@@ -1,0 +1,40 @@
+{
+  "name": "morgen-geschaft-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Backend API Morgen Geschäft yang dikelola oleh PM2 pada pengembangan lokal dan oleh Node.js App di hosting.",
+  "main": "app.js",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node --watch app.js",
+    "test": "node --test tests/*.test.js",
+    "test:watch": "node --test --watch tests/*.test.js",
+    "setup:biteship": "node scripts/biteship-setup.js",
+    "backup:firestore": "node scripts/firestore-backup-json.js",
+    "pm2:start": "pm2 start config/ecosystem.config.cjs",
+    "pm2:restart": "pm2 restart morgen-backend --update-env",
+    "pm2:status": "pm2 status morgen-backend",
+    "pm2:logs": "pm2 logs morgen-backend",
+    "admin:grant": "node scripts/admin-claims.js grant",
+    "admin:revoke": "node scripts/admin-claims.js revoke",
+    "admin:mfa": "node scripts/admin-mfa.js"
+  },
+  "dependencies": {
+    "@sentry/node": "^10.68.0",
+    "@upstash/redis": "^1.38.0",
+    "cloudinary": "^2.10.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "firebase-admin": "14.2.0",
+    "helmet": "^8.3.0",
+    "multer": "^2.2.0",
+    "nodemailer": "^9.0.3",
+    "pdfkit": "^0.15.0",
+    "web-push": "^3.6.7"
+  }
+}

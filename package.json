@@ -1,0 +1,60 @@
+{
+  "name": "morgen-geschaft-project",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w frontend",
+    "dev:frontend": "npm run dev -w frontend",
+    "dev:frontend:clean": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/reset-local-frontend.ps1",
+    "dev:full": "concurrently -n FRONTEND,BACKEND -c cyan,green \"npm run dev -w frontend\" \"npm run dev -w backend\"",
+    "dev:backend": "npm run dev -w backend",
+    "backend:status": "pm2 status morgen-backend",
+    "backend:restart": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/restart-pm2-backend.ps1",
+    "backend:logs": "pm2 logs morgen-backend",
+    "build": "npm run build -w frontend",
+    "preview": "npm run preview -w frontend",
+    "tree": "node scripts/generate-project-tree.mjs",
+    "tree:check": "node scripts/generate-project-tree.mjs --check",
+    "structure:cleanup": "node scripts/cleanup-project-structure.mjs",
+    "admin:grant": "npm run admin:grant -w backend --",
+    "admin:revoke": "npm run admin:revoke -w backend --",
+    "admin:mfa": "npm run admin:mfa -w backend --",
+    "build:hosting": "npm run build -w frontend && node scripts/prepare-rumahweb-deploy.mjs",
+    "zip:public": "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/create-public-update.ps1",
+    "verify:production": "node scripts/verify-production.mjs",
+    "monitor:storefront": "node scripts/synthetic-storefront.mjs",
+    "logs:audit": "node scripts/scan-production-log.mjs",
+    "privacy:audit": "node scripts/audit-sensitive-files.mjs",
+    "backup:external": "powershell -NoProfile -ExecutionPolicy Bypass -File infra/scripts/sync-backup-to-external.ps1",
+    "sentry:install": "npm install @sentry/node -w backend",
+    "privacy:cleanup": "node scripts/remove-sensitive-backups.mjs",
+    "verify:public-content": "node scripts/verify-public-content-routes.mjs",
+    "verify:local-api": "node scripts/verify-local-api.mjs",
+    "firebase:login": "npx --yes firebase-tools login",
+    "firebase:status": "npx --yes firebase-tools projects:list",
+    "firebase:deploy": "npx --yes firebase-tools deploy --only firestore:rules,firestore:indexes",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,jsx,json,md,css}\"",
+    "format:check": "prettier --check \"**/*.{js,jsx,json,md,css}\"",
+    "test": "npm test -w backend && npm test -w frontend",
+    "test:backend": "npm test -w backend",
+    "test:frontend": "npm test -w frontend"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^9.0.0",
+    "eslint": "^10.8.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-unused-imports": "^4.4.1",
+    "globals": "^17.7.0",
+    "prettier": "^3.9.6"
+  },
+  "dependencies": {
+    "@sentry/node": "^10.68.0"
+  }
+}

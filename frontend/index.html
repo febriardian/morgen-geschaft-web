@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <!-- Midtrans Snap script sekarang dimuat secara dinamis oleh src/utils/midtrans.js
+         berdasarkan VITE_MIDTRANS_CLIENT_KEY dan VITE_MIDTRANS_IS_PRODUCTION.
+         TIDAK perlu lagi hardcode script tag di sini. -->
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Content Security Policy is supplied by the Express/Helmet backend in production.
+         Keeping a second meta CSP here made local Vite API requests and analytics
+         obey two different policies at the same time. -->
+    <title>Morgen Geschäft</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="theme-color" content="#162B45" />
+    <link rel="canonical" href="https://morgengeschaft.com/" />
+
+    <!-- ====== SEO & SOCIAL SHARING ====== -->
+    <meta name="description" content="Morgen Geschäft — toko skincare online dengan produk berlabel jelas: bahan aktif dan jenis kulit yang cocok. Kahf, Somethinc, Wardah, Implora, The Originote." />
+    <meta name="keywords" content="skincare, toko skincare online, Kahf, Somethinc, Wardah, face wash, sunscreen, serum jerawat" />
+    <meta name="author" content="Morgen Geschäft" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Morgen Geschäft — Skincare yang Ditandai Seperti Resep" />
+    <meta property="og:description" content="Setiap produk diberi label bahan aktif dan jenis kulit yang cocok, supaya kamu tahu pasti apa yang dipakai di wajahmu." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://morgengeschaft.com/photos/logo-512.png" />
+    <meta property="og:url" content="https://morgengeschaft.com" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Morgen Geschäft" />
+    <meta name="twitter:description" content="Skincare yang ditandai seperti resep, bukan dijual seperti iklan." />
+    <meta name="twitter:image" content="https://morgengeschaft.com/photos/logo-512.png" />
+    <!-- ====== END SEO ====== -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="image"
+      href="/hero/product-6-640.webp"
+      imagesrcset="/hero/product-6-640.webp 640w, /hero/product-6-960.webp 960w"
+      imagesizes="(max-width: 768px) 100vw, 55vw"
+      fetchpriority="high"
+      type="image/webp"
+    />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+    />
+    <link
+      id="morgen-font-styles"
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap"
+    />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" />
+    </noscript>
+
+    <style>
+      :root {
+        color-scheme: light;
+        background: #f6f1e7;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+        background: #f6f1e7;
+      }
+
+      body {
+        min-width: 320px;
+      }
+
+      .mg-initial-loader {
+        min-height: 100vh;
+        overflow: hidden;
+        background: #f6f1e7;
+        color: #162b45;
+        font-family: "Work Sans", Arial, sans-serif;
+      }
+
+      .mg-initial-loader__header {
+        height: 82px;
+        padding: 0 48px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        border-bottom: 1px solid #e3dcc9;
+        background: rgba(246, 241, 231, 0.96);
+      }
+
+      .mg-initial-loader__brand,
+      .mg-initial-loader__actions,
+      .mg-initial-loader__copy {
+        display: flex;
+        align-items: center;
+      }
+
+      .mg-initial-loader__brand {
+        gap: 12px;
+      }
+
+      .mg-initial-loader__actions {
+        gap: 14px;
+      }
+
+      .mg-initial-loader__hero {
+        min-height: calc(100vh - 83px);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(420px, 0.92fr);
+      }
+
+      .mg-initial-loader__copy {
+        align-items: flex-start;
+        justify-content: center;
+        flex-direction: column;
+        padding: 72px clamp(32px, 6vw, 92px);
+      }
+
+      .mg-initial-loader__visual {
+        position: relative;
+        min-height: 520px;
+        border-left: 1px solid #e3dcc9;
+        background: linear-gradient(145deg, #ede7db 0%, #f6f1e7 55%, #e8dfd0 100%);
+        overflow: hidden;
+      }
+
+      .mg-initial-loader__visual::after {
+        content: "";
+        position: absolute;
+        inset: 12% 13%;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(255,255,255,.8), rgba(227,220,201,.55));
+        box-shadow: 0 24px 70px rgba(22, 43, 69, 0.06);
+      }
+
+      .mg-skeleton {
+        position: relative;
+        overflow: hidden;
+        background: #e6dfd2;
+      }
+
+      .mg-skeleton::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        transform: translateX(-100%);
+        background: linear-gradient(
+          90deg,
+          transparent 0%,
+          rgba(255, 255, 255, 0.72) 46%,
+          transparent 100%
+        );
+        animation: mgInitialShimmer 1.35s ease-in-out infinite;
+      }
+
+      .mg-initial-loader__logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 11px;
+      }
+
+      .mg-initial-loader__brand-name {
+        width: 190px;
+        height: 24px;
+        border-radius: 8px;
+      }
+
+      .mg-initial-loader__action {
+        width: 24px;
+        height: 24px;
+        border-radius: 999px;
+      }
+
+      .mg-initial-loader__eyebrow {
+        width: 210px;
+        height: 13px;
+        margin-bottom: 24px;
+        border-radius: 999px;
+      }
+
+      .mg-initial-loader__title {
+        width: min(560px, 92%);
+        height: 58px;
+        margin-bottom: 12px;
+        border-radius: 13px;
+      }
+
+      .mg-initial-loader__title--short {
+        width: min(410px, 74%);
+      }
+
+      .mg-initial-loader__line {
+        width: min(520px, 88%);
+        height: 16px;
+        margin-top: 12px;
+        border-radius: 999px;
+      }
+
+      .mg-initial-loader__line--short {
+        width: min(390px, 68%);
+      }
+
+      .mg-initial-loader__button {
+        width: 178px;
+        height: 50px;
+        margin-top: 30px;
+        border-radius: 12px;
+        background: #d7d0c2;
+      }
+
+      .mg-initial-loader__dots {
+        display: flex;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .mg-initial-loader__dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 999px;
+      }
+
+      .mg-initial-loader__dot:first-child {
+        width: 28px;
+      }
+
+      .mg-initial-loader__status {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @keyframes mgInitialShimmer {
+        100% {
+          transform: translateX(100%);
+        }
+      }
+
+      @media (max-width: 900px) {
+        .mg-initial-loader__header {
+          height: 72px;
+          padding: 0 24px;
+        }
+
+        .mg-initial-loader__hero {
+          min-height: calc(100vh - 73px);
+          grid-template-columns: 1fr;
+        }
+
+        .mg-initial-loader__copy {
+          min-height: 430px;
+          padding: 64px 32px 44px;
+        }
+
+        .mg-initial-loader__visual {
+          min-height: 300px;
+          border-top: 1px solid #e3dcc9;
+          border-left: 0;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .mg-initial-loader__header {
+          height: 68px;
+          padding: 0 18px;
+        }
+
+        .mg-initial-loader__brand-name {
+          width: 152px;
+          height: 21px;
+        }
+
+        .mg-initial-loader__actions {
+          gap: 10px;
+        }
+
+        .mg-initial-loader__action:nth-child(-n + 2) {
+          display: none;
+        }
+
+        .mg-initial-loader__copy {
+          min-height: 390px;
+          padding: 52px 22px 38px;
+        }
+
+        .mg-initial-loader__eyebrow {
+          width: 154px;
+          margin-bottom: 20px;
+        }
+
+        .mg-initial-loader__title {
+          height: 42px;
+          border-radius: 10px;
+        }
+
+        .mg-initial-loader__visual {
+          min-height: 260px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .mg-skeleton::after {
+          animation: none;
+          display: none;
+        }
+      }
+
+      /* Noscript fallback styling */
+      .mg-noscript {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f6f1e7;
+        font-family: "Work Sans", Arial, sans-serif;
+        padding: 32px;
+      }
+      .mg-noscript__card {
+        max-width: 420px;
+        background: #fff;
+        border: 1px solid #e3dcc9;
+        border-radius: 16px;
+        padding: 40px 32px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(22,43,69,.06);
+      }
+      .mg-noscript__card h1 {
+        font-family: Georgia, serif;
+        font-size: 24px;
+        color: #162b45;
+        margin: 0 0 12px;
+      }
+      .mg-noscript__card p {
+        font-size: 14px;
+        color: #6b6558;
+        line-height: 1.7;
+        margin: 0 0 20px;
+      }
+      .mg-noscript__card a {
+        display: inline-block;
+        background: #1f2e22;
+        color: #f6f1e7;
+        text-decoration: none;
+        padding: 12px 24px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        margin: 4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div class="mg-initial-loader" role="status" aria-live="polite" aria-busy="true">
+        <span class="mg-initial-loader__status">Memuat Morgen Geschäft...</span>
+
+        <header class="mg-initial-loader__header" aria-hidden="true">
+          <div class="mg-initial-loader__brand">
+            <div class="mg-initial-loader__logo mg-skeleton"></div>
+            <div class="mg-initial-loader__brand-name mg-skeleton"></div>
+          </div>
+          <div class="mg-initial-loader__actions">
+            <div class="mg-initial-loader__action mg-skeleton"></div>
+            <div class="mg-initial-loader__action mg-skeleton"></div>
+            <div class="mg-initial-loader__action mg-skeleton"></div>
+            <div class="mg-initial-loader__action mg-skeleton"></div>
+          </div>
+        </header>
+
+        <main class="mg-initial-loader__hero" aria-hidden="true">
+          <section class="mg-initial-loader__copy">
+            <div class="mg-initial-loader__eyebrow mg-skeleton"></div>
+            <div class="mg-initial-loader__title mg-skeleton"></div>
+            <div class="mg-initial-loader__title mg-initial-loader__title--short mg-skeleton"></div>
+            <div class="mg-initial-loader__line mg-skeleton"></div>
+            <div class="mg-initial-loader__line mg-initial-loader__line--short mg-skeleton"></div>
+            <div class="mg-initial-loader__button mg-skeleton"></div>
+            <div class="mg-initial-loader__dots">
+              <div class="mg-initial-loader__dot mg-skeleton"></div>
+              <div class="mg-initial-loader__dot mg-skeleton"></div>
+              <div class="mg-initial-loader__dot mg-skeleton"></div>
+            </div>
+          </section>
+          <div class="mg-initial-loader__visual mg-skeleton"></div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Noscript fallback: arahkan ke WhatsApp/Shopee jika JS disabled -->
+    <noscript>
+      <div class="mg-noscript">
+        <div class="mg-noscript__card">
+          <h1>Morgen Geschäft</h1>
+          <p>
+            Website ini memerlukan JavaScript untuk berfungsi.
+            Aktifkan JavaScript di browser kamu, atau belanja langsung melalui:
+          </p>
+          <a href="https://wa.me/6289601725019?text=Halo%20Morgen%20Geschaft%2C%20saya%20ingin%20belanja">WhatsApp</a>
+          <a href="https://s.shopee.co.id/3qKoPG98iY">Shopee</a>
+        </div>
+      </div>
+    </noscript>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
