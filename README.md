@@ -1,11 +1,19 @@
 <div align="center">
   <img src="./assets/logo.webp" alt="Logo Morgen Geschäft" width="112" />
 
-# Morgen Geschäft
+# Morgen Geschäft Web
 
 **Storefront e-commerce bilingual dengan pembayaran, pengiriman, loyalty, referral, chatbot AI, retur, dan panel administrasi.**
 
 [Website](https://morgengeschaft.com/id) · [English](https://morgengeschaft.com/en) · [Dokumentasi lengkap](./docs/README.md) · [Changelog](./CHANGELOG.md) · [Lisensi MIT](./LICENSE)
+
+![React 18](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=162B45)
+![Vite 5](https://img.shields.io/badge/Vite-5-646CFF?logo=vite&logoColor=white)
+![Node.js 22](https://img.shields.io/badge/Node.js-22%2B-339933?logo=nodedotjs&logoColor=white)
+![Express 4](https://img.shields.io/badge/Express-4-000000?logo=express&logoColor=white)
+![Firebase](https://img.shields.io/badge/Firebase-Firestore-FFCA28?logo=firebase&logoColor=162B45)
+![License](https://img.shields.io/badge/License-MIT-F28C28)
+
 </div>
 
 ---
