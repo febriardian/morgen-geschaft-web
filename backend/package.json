@@ -29,7 +29,7 @@
     "cloudinary": "^2.10.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
-    "express": "^4.19.2",
+    "express": "^5.2.1",
     "firebase-admin": "14.2.0",
     "helmet": "^8.3.0",
     "multer": "^2.2.0",
