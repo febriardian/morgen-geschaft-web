@@ -26,7 +26,7 @@
   "dependencies": {
     "@sentry/node": "^10.68.0",
     "@upstash/redis": "^1.38.3",
-    "cloudinary": "^2.10.1",
+    "cloudinary": "^2.11.0",
     "cors": "^2.8.5",
     "dotenv": "^17.4.2",
     "express": "^4.19.2",
