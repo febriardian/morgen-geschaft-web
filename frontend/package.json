@@ -35,7 +35,7 @@
     "sharp": "^0.35.0",
     "tailwindcss": "^3.4.19",
     "vite": "^7.3.6",
-    "vite-imagetools": "^12.0.0",
+    "vite-imagetools": "^12.0.1",
     "vitest": "^3.2.7"
   }
 }
