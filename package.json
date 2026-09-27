@@ -58,6 +58,6 @@
     "prettier": "^3.9.6"
   },
   "dependencies": {
-    "@sentry/node": "^10.68.0"
+    "@sentry/node": "^11.0.0"
   }
 }
